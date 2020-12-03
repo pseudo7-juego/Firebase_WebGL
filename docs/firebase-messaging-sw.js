@@ -26,6 +26,6 @@ messaging.requestPermission()
     console.error("Error getting permission.")
   })
 
-messaging.OnMessage(function (payload) {
-  console.log(payload);
-})
+messaging.onMessage(function(payload) {
+    console.log("Message received.", payload);
+  });
