@@ -16,16 +16,6 @@ firebase.initializeApp(firebaseConfig);
 
 const messaging = firebase.messaging();
 
-messaging.requestPermission()
-  .then(function () {
-    console.log("Got permission.")
-    unityInstance.SendMessage(parsedObjectName, parsedCallback, "Got Permission");
-  })
-  .catch(function (err) {
-    unityInstance.SendMessage(parsedObjectName, parsedFallback, err);
-    console.error("Error getting permission.")
-  })
-
 messaging.onMessage(function(payload) {
     console.log("Message received.", payload);
   });
