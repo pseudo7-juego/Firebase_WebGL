@@ -16,16 +16,15 @@ firebase.initializeApp(firebaseConfig);
 
 const messaging = firebase.messaging();
 
-messaging.requestPermission()
-  .then(function () {
-    console.log("Got permission.")
-    unityInstance.SendMessage(parsedObjectName, parsedCallback, "Got Permission");
-  })
-  .catch(function (err) {
-    unityInstance.SendMessage(parsedObjectName, parsedFallback, err);
-    console.error("Error getting permission.")
-  })
+messaging.onBackgroundMessage(function(payload) {
+  console.log('[firebase-messaging-sw.js] Received background message ', payload);
+  // Customize notification here
+  const notificationTitle = 'Background Message Title';
+  const notificationOptions = {
+    body: 'Background Message body.',
+    icon: 'https://cdn.juegostudio.com/wp-content/uploads/2018/04/Favicon.png'
+  };
 
-messaging.OnMessage(function (payload) {
-  console.log(payload);
-})
+  self.registration.showNotification(notificationTitle,
+    notificationOptions);
+});
