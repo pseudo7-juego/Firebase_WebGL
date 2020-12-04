@@ -24,10 +24,10 @@ messaging.onBackgroundMessage(function (payload) {
   console.log('Title', parsedPayload.notification.title);
   console.log('Body', parsedPayload.notification.body);
 
-  const notificationTitle = parsedPayload.title;
+  const notificationTitle = parsedPayload.notification.title;
   const notificationOptions = {
-    body: parsedPayload.body,
-    icon: parsedPayload.image
+    body: parsedPayload.notification.body,
+    icon: parsedPayload.notification.image
   };
 
   self.registration.showNotification(notificationTitle,
