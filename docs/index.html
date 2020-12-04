@@ -54,7 +54,11 @@
         });
     }
 messaging.onMessage(function(payload) {
-    console.log('Message received. ', payload);
+  var parsedPayload = JSON.parse(payload);
+  
+  console.log(parsedPayload.notification.title);
+  console.log(parsedPayload.notification.body);
+  console.log('Message received. ', payload);
   const notificationTitle = parsedPayload.title;
   const notificationOptions = {
     body: parsedPayload.body,
