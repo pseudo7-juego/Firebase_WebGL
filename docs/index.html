@@ -54,22 +54,13 @@
         });
     }
 messaging.onMessage(function(payload) {
+  console.log('Message received. ', payload);
   var jsonData = JSON.stringify(payload);
   console.log('JSON DATA: ',jsonData);
   var parsedPayload = JSON.parse(jsonData);
-  
-  console.log(parsedPayload.notification.title);
-  console.log(parsedPayload.notification.body);
-  console.log('Message received. ', payload);
-  const notificationTitle = parsedPayload.title;
-  const notificationOptions = {
-    body: parsedPayload.body,
-    icon: parsedPayload.image
-  };
+  console.log('Title',parsedPayload.notification.title);
+  console.log('Body',parsedPayload.notification.body);
 
-  self.registration.showNotification(notificationTitle,
-    notificationOptions);
-  });
   </script>
 </body>
 
