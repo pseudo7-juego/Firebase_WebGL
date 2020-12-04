@@ -58,8 +58,12 @@
       var jsonData = JSON.stringify(payload);
       console.log('JSON DATA: ', jsonData);
       var parsedPayload = JSON.parse(jsonData);
-      console.log('Title', parsedPayload.notification.title);
-      console.log('Body', parsedPayload.notification.body);
+      const title = parsedPayload.notification.title;
+      const body = parsedPayload.notification.body;
+      console.log('Title', title);
+      console.log('Body', body);
+      // unityInstance.SendMessage({gameObject.name}, {string methodName}, {string title}, {string body})
+      unityInstance.SendMessage("[FirebaseHandler]", "OnNotificationDropped", title, body);
     });
   </script>
 </body>
