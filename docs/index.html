@@ -54,7 +54,9 @@
         });
     }
 messaging.onMessage(function(payload) {
-  var parsedPayload = JSON.parse(payload);
+  var jsonData = JSON.stringify(payload);
+  console.log('JSON DATA: ',jsonData);
+  var parsedPayload = JSON.parse(jsonData);
   
   console.log(parsedPayload.notification.title);
   console.log(parsedPayload.notification.body);
