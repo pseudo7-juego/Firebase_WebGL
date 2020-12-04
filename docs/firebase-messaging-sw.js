@@ -16,13 +16,14 @@ firebase.initializeApp(firebaseConfig);
 
 const messaging = firebase.messaging();
 
-messaging.onBackgroundMessage(function(payload) {
+messaging.onBackgroundMessage(function (payload) {
   console.log('[firebase-messaging-sw.js] Received background message ', payload);
-  var parsedPayload = JSON.parse(payload);
-  // Customize notification here
-  
-  console.error(parsedPayload.notification.title);
-  console.error(parsedPayload.notification.body);
+  var jsonData = JSON.stringify(payload);
+  console.log('JSON DATA: ', jsonData);
+  var parsedPayload = JSON.parse(jsonData);
+  console.log('Title', parsedPayload.notification.title);
+  console.log('Body', parsedPayload.notification.body);
+
   const notificationTitle = parsedPayload.title;
   const notificationOptions = {
     body: parsedPayload.body,
