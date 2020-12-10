@@ -13,6 +13,27 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
+self.addEventListener('notificationclick', event => {
+  console.log('On notification click: ', event.notification.tag);
+  event.notification.close();
+
+  // This looks to see if the current is already open and
+  // focuses if it is
+  event.waitUntil(
+    clients
+      .matchAll({
+        type: 'window'
+      })
+      .then(clientList => {
+        for (let i = 0; i < clientList.length; i++) {
+          const client = clientList[i];
+          if (client.url === '/' && 'focus' in client) return client.focus();
+        }
+        if (clients.openWindow) return clients.openWindow('/');
+      })
+  );
+});
+
 const messaging = firebase.messaging();
 
 messaging.onBackgroundMessage(function (payload) {
@@ -22,7 +43,7 @@ messaging.onBackgroundMessage(function (payload) {
   var parsedPayload = JSON.parse(jsonData);
   console.log('Title', parsedPayload.notification.title);
   console.log('Body', parsedPayload.notification.body);
-  console.log('Click Action', parsedPayload.notification.click_action);
+  console.log('Click Action', parsedPayload.data.click_action);
 
   const notificationTitle = parsedPayload.notification.title;
   const notificationOptions = {
