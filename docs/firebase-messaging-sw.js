@@ -30,7 +30,7 @@ self.addEventListener('notificationclick', event => {
           const client = clientList[i];
           if (client.url === mainUrl in client) return client.focus();
         }
-        if (clients.openWindow) return clients.openWindow("https://google.com");
+        if (clients.openWindow) return clients.openWindow(mainUrl);
       })
   );
 });
