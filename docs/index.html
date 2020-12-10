@@ -63,7 +63,6 @@
       console.log('Title', title);
       console.log('Body', body);
       var notificationData = title + '%' + body;
-      // unityInstance.SendMessage({gameObject.name}, {string methodName}, {string title}, {string body})
       unityInstance.SendMessage("[FirebaseHandler]", "OnNotificationDropped", notificationData);
     });
   </script>

@@ -1,5 +1,4 @@
 importScripts("https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js");
-importScripts("https://www.gstatic.com/firebasejs/8.1.1/firebase-analytics.js");
 importScripts("https://www.gstatic.com/firebasejs/8.1.1/firebase-messaging.js");
 
 var firebaseConfig = {
@@ -23,11 +22,13 @@ messaging.onBackgroundMessage(function (payload) {
   var parsedPayload = JSON.parse(jsonData);
   console.log('Title', parsedPayload.notification.title);
   console.log('Body', parsedPayload.notification.body);
+  console.log('Click Action', parsedPayload.notification.click_action);
 
   const notificationTitle = parsedPayload.notification.title;
   const notificationOptions = {
     body: parsedPayload.notification.body,
-    icon: parsedPayload.notification.image
+    icon: parsedPayload.notification.image,
+    click_action: parsedPayload.notification.click_action
   };
 
   self.registration.showNotification(notificationTitle,
