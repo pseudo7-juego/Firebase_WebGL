@@ -28,9 +28,9 @@ messaging.onBackgroundMessage(function (payload) {
   const notificationOptions = {
     body: parsedPayload.notification.body,
     icon: parsedPayload.notification.image,
-    click_action: parsedPayload.notification.click_action,
+    click_action: parsedPayload.data.click_action,
     data: {
-      click_action: parsedPayload.notification.click_action
+      click_action: parsedPayload.data.click_action
     }
   };
 
