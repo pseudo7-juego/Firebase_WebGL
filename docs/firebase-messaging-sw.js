@@ -14,7 +14,7 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 self.addEventListener('notificationclick', event => {
-  console.log('On notification click: ', event.notification.tag);
+  console.log('On notification click: ', Json.stringify(event.notification));
   event.notification.close();
 
   // This looks to see if the current is already open and
