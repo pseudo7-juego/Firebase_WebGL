@@ -1,6 +1,8 @@
 importScripts("https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js");
 importScripts("https://www.gstatic.com/firebasejs/8.1.1/firebase-messaging.js");
 
+const mainUrl = "https://pseudo7-juego.github.io/Firebase_WebGL/";
+
 var firebaseConfig = {
   apiKey: "AIzaSyBFst3hheXf6nbpreib3dUDnNb1vDPf1TY",
   authDomain: "webgl-rnd.firebaseapp.com",
@@ -14,11 +16,10 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 self.addEventListener('notificationclick', event => {
-  console.log('On notification click: ', JSON.stringify(event.notification));
+  console.log('On notification click: ', JSON.stringify(event));
   event.notification.close();
 
-  // This looks to see if the current is already open and
-  // focuses if it is
+  // This looks to see if the current is already open and focuses if it is. [DOESN'T WORK ALWAYS/MOST OF THE TIME!!!]
   event.waitUntil(
     clients
       .matchAll({
@@ -27,7 +28,7 @@ self.addEventListener('notificationclick', event => {
       .then(clientList => {
         for (let i = 0; i < clientList.length; i++) {
           const client = clientList[i];
-          if (client.url === '/' && 'focus' in client) return client.focus();
+          if (client.url === mainUrl in client) return client.focus();
         }
         if (clients.openWindow) return clients.openWindow("https://google.com");
       })
