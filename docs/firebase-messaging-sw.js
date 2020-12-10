@@ -14,7 +14,7 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 self.addEventListener('notificationclick', event => {
-  console.log('On notification click: ', Json.stringify(event.notification));
+  console.log('On notification click: ', JSON.stringify(event.notification));
   event.notification.close();
 
   // This looks to see if the current is already open and
@@ -29,7 +29,7 @@ self.addEventListener('notificationclick', event => {
           const client = clientList[i];
           if (client.url === '/' && 'focus' in client) return client.focus();
         }
-        if (clients.openWindow) return clients.openWindow('/');
+        if (clients.openWindow) return clients.openWindow("https://google.com");
       })
   );
 });
